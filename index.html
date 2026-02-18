@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Splitter Pro - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body onload="initPage()">
+    <div class="navContainer">
+        <div class="navLogo">SplitMate</div>
+        <div class="navLinks">
+            <a href="index.html" class="navItem activeNavItem">Dashboard</a>
+            <a href="expenses.html" class="navItem">Expenses</a>
+            <a href="settle.html" class="navItem">Settle</a>
+        </div>
+    </div>
+
+    <div class="appContainer">
+        <h1 class="pageTitle">Team Dashboard</h1>
+
+        <div id="errorMsg" class="errorAlert"></div>
+
+        <div class="dashboardGrid">
+            <div class="contentPanel">
+                <h2 class="panelHeading">Add Team Member</h2>
+                <div class="inputWrapper">
+                    <input type="text" id="memberName" class="textInput" placeholder="Enter member name here...">
+                    <button onclick="addMemberBtnClick()" class="btn primaryBtn">Add Member</button>
+                </div>
+
+                <div class="listWrapper">
+                    <ul id="memberList" class="dataList"></ul>
+                </div>
+            </div>
+
+            <div class="contentPanel statPanel">
+                <h2 class="panelHeading">Quick Overview</h2>
+                <div class="statBlock">
+                    <div class="statLabel">Registered Members</div>
+                    <div class="statValue" id="statMembersCount">0</div>
+                </div>
+                <div class="statBlock">
+                    <div class="statLabel">Total Expenses</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
