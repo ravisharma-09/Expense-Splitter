@@ -48,3 +48,43 @@ body {
 }
 
 .appContainer {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.pageTitle {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 32px;
+    border-bottom: 3px solid #3498db;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.dashboardGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .dashboardGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contentPanel {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.statPanel {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+.panelHeading {

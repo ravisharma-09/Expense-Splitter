@@ -77,7 +77,19 @@ function renderDashboard() {
 }
 
 
-function formatCurrencyValue() {}
+function formatCurrencyValue(valueNumber) {
+    let rounded = Math.round(valueNumber * 100) / 100;
+    let parts = rounded.toString().split(".");
+    let integerPart = parts[0];
+    let decimalPart = parts.length > 1 ? parts[1] : "00";
+
+    if (decimalPart.length === 1) {
+        decimalPart = decimalPart + "0";
+    }
+
+    return integerPart + "." + decimalPart;
+}
+
 
 function addMemberBtnClick() {
     let inputEl = document.getElementById("memberName");
