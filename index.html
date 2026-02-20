@@ -9,12 +9,24 @@
 <body>
     <div class="container">
         <h1>Expense Splitter</h1>
+        
+        <div class="input-section">
+            <h3 class="subtitle">Add Member</h3>
+            <input type="text" id="member-name" placeholder="Member Name">
+            <button id="add-member-btn">Add Member</button>
+        </div>
+        
+        <ul id="member-list"></ul>
+        
+        <hr>
+        
         <div class="input-section">
             <h3 class="subtitle">Add Expense</h3>
             <input type="text" id="expense-name" placeholder="Expense Name">
             <input type="number" id="expense-amount" placeholder="Amount">
             <button id="add-btn">Add Expense</button>
         </div>
+        
         <ul id="expense-list"></ul>
     </div>
     <script src="script.js"></script>
