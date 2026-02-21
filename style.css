@@ -128,3 +128,32 @@ body {
     font-weight: 600;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.primaryBtn {
+    background-color: #3498db;
+    color: white;
+}
+
+.primaryBtn:hover {
+    background-color: #2980b9;
+}
+
+.successBtn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.successBtn:hover {
+    background-color: #27ae60;
+}
+
+.secondaryBtn {
+    background-color: #95a5a6;
+    color: white;
+}

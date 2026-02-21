@@ -128,7 +128,31 @@ function addMemberBtnClick() {
 }
 
 
-function executeMemberDeletion() {}
+function executeMemberDeletion(targetName) {
+    let hasExpenses = false;
+    for (let e = 0; e < appData.expenses.length; e++) {
+        if (appData.expenses[e].payer === targetName) {
+            hasExpenses = true;
+        }
+    }
+
+    if (hasExpenses) {
+        displayErrorMessage("Cannot remove person. They have associated expenses.");
+        return;
+    }
+
+    let updatedMembersList = [];
+    for (let i = 0; i < appData.members.length; i++) {
+        if (appData.members[i] !== targetName) {
+            updatedMembersList.push(appData.members[i]);
+        }
+    }
+
+    appData.members = updatedMembersList;
+    persistDataToStorage();
+    renderDashboard();
+}
+
 
 function renderExpensesPage() {}
 
