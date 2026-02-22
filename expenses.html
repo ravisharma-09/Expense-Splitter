@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Splitter Pro - Manage Expenses</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body onload="initPage()">
+    <div class="navContainer">
+        <div class="navLogo">SplitMate</div>
+        <div class="navLinks">
+            <a href="index.html" class="navItem">Dashboard</a>
+            <a href="expenses.html" class="navItem activeNavItem">Expenses</a>
+            <a href="settle.html" class="navItem">Settle</a>
+        </div>
+    </div>
+
+    <div class="appContainer">
+        <h1 class="pageTitle">Expense Records</h1>
+
+        <div id="errorMsg" class="errorAlert"></div>
+
+        <div class="contentPanel">
+            <h2 class="panelHeading">Record an Expense</h2>
+            <div class="formContainer">
+                <div class="formGroup">
+                    <label class="formLabel">What did you buy?</label>
+                    <input type="text" id="expName" class="textInput fullWidth" placeholder="e.g. Dinner at Dominos">
+                </div>
+
+                <div class="formRow">
+                    <div class="formGroup halfWidth">
+                        <label class="formLabel">Amount Cost (₹)</label>
+                        <input type="number" id="expAmount" class="textInput" placeholder="0.00">
+                    </div>
+                    <div class="formGroup halfWidth">
+                        <label class="formLabel">Who Paid?</label>
+                        <select id="payerSelect" class="dropdownInput">
+                            <option value="">Select a member</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="buttonGroup">
+                    <button id="addExpBtn" onclick="addExpenseBtnClick()" class="btn successBtn">Save Expense</button>
+                    <button id="cancelEditBtn" onclick="cancelEditBtnClick()" class="btn secondaryBtn hidden">Cancel
+                        Editing</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentPanel">
+            <h2 class="panelHeading">Recent Transactions</h2>
+            <div class="listWrapper">
+                <ul id="expList" class="dataList expenseList"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

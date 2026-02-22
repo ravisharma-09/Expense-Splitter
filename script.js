@@ -154,7 +154,71 @@ function executeMemberDeletion(targetName) {
 }
 
 
-function renderExpensesPage() {}
+function renderExpensesPage() {
+    let expListEl = document.getElementById("expList");
+    let payerSelectEl = document.getElementById("payerSelect");
+
+    if (!expListEl || !payerSelectEl) return;
+
+    payerSelectEl.innerHTML = "";
+    let defaultOpt = document.createElement("option");
+    defaultOpt.value = "";
+    defaultOpt.innerText = "Select a member";
+    payerSelectEl.appendChild(defaultOpt);
+
+    for (let p = 0; p < appData.members.length; p++) {
+        let opt = document.createElement("option");
+        opt.value = appData.members[p];
+        opt.innerText = appData.members[p];
+        payerSelectEl.appendChild(opt);
+    }
+
+    expListEl.innerHTML = "";
+
+    for (let x = 0; x < appData.expenses.length; x++) {
+        let currentExp = appData.expenses[x];
+
+        let listItem = document.createElement("li");
+
+        let textDiv = document.createElement("div");
+        textDiv.className = "flexColumn";
+
+        let headerSpan = document.createElement("strong");
+        headerSpan.innerText = currentExp.name;
+
+        let descSpan = document.createElement("span");
+        descSpan.innerText = "Paid ₹" + formatCurrencyValue(currentExp.amount) + " by " + currentExp.payer;
+
+        textDiv.appendChild(headerSpan);
+        textDiv.appendChild(descSpan);
+
+        let btnsDiv = document.createElement("div");
+        btnsDiv.className = "actionButtons";
+
+        let editB = document.createElement("button");
+        editB.className = "editBtn";
+        editB.innerText = "Edit";
+        editB.onclick = function () {
+            startEditExpenseMode(currentExp.id);
+        };
+
+        let delB = document.createElement("button");
+        delB.className = "btn dangerBtn";
+        delB.innerText = "Delete";
+        delB.onclick = function () {
+            removeExpenseById(currentExp.id);
+        };
+
+        btnsDiv.appendChild(editB);
+        btnsDiv.appendChild(delB);
+
+        listItem.appendChild(textDiv);
+        listItem.appendChild(btnsDiv);
+
+        expListEl.appendChild(listItem);
+    }
+}
+
 
 function addExpenseBtnClick() {}
 
