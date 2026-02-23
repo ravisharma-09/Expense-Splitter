@@ -220,7 +220,56 @@ function renderExpensesPage() {
 }
 
 
-function addExpenseBtnClick() {}
+function addExpenseBtnClick() {
+    let nameBox = document.getElementById("expName");
+    let amtBox = document.getElementById("expAmount");
+    let payerBox = document.getElementById("payerSelect");
+
+    if (!nameBox || !amtBox || !payerBox) return;
+
+    let eName = nameBox.value.trim();
+    let eAmt = parseFloat(amtBox.value);
+    let ePayer = payerBox.value;
+
+    let isNameValid = eName.length > 0;
+    let isAmtValid = !isNaN(eAmt) && eAmt > 0;
+    let isPayerValid = ePayer !== "";
+
+    if (!isNameValid || !isAmtValid || !isPayerValid) {
+        displayErrorMessage("Please fill all fields with correct data.");
+        return;
+    }
+
+    if (currentEditId === -1) {
+        let generatedId = new Date().getTime();
+        let newRecord = {
+            id: generatedId,
+            name: eName,
+            amount: eAmt,
+            payer: ePayer
+        };
+        appData.expenses.push(newRecord);
+    } else {
+        for (let r = 0; r < appData.expenses.length; r++) {
+            if (appData.expenses[r].id === currentEditId) {
+                appData.expenses[r].name = eName;
+                appData.expenses[r].amount = eAmt;
+                appData.expenses[r].payer = ePayer;
+            }
+        }
+        cancelEditBtnClick();
+    }
+
+    if (currentEditId === -1) {
+        nameBox.value = "";
+        amtBox.value = "";
+        payerBox.value = "";
+    }
+
+    persistDataToStorage();
+    renderExpensesPage();
+}
+
 
 function startEditExpenseMode() {}
 
