@@ -198,3 +198,13 @@ body {
 .dataList li {
     background-color: #f8f9fa;
     padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border-left: 4px solid #3498db;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expenseList li {
+    border-left-color: #2ecc71;

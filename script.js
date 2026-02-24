@@ -271,11 +271,79 @@ function addExpenseBtnClick() {
 }
 
 
-function startEditExpenseMode() {}
+function startEditExpenseMode(recordId) {
+    currentEditId = recordId;
 
-function cancelEditBtnClick() {}
+    let nameBox = document.getElementById("expName");
+    let amtBox = document.getElementById("expAmount");
+    let payerBox = document.getElementById("payerSelect");
 
-function removeExpenseById() {}
+    let specificRecord = null;
+    for (let u = 0; u < appData.expenses.length; u++) {
+        if (appData.expenses[u].id === recordId) {
+            specificRecord = appData.expenses[u];
+        }
+    }
+
+    if (specificRecord !== null) {
+        nameBox.value = specificRecord.name;
+        amtBox.value = specificRecord.amount;
+        payerBox.value = specificRecord.payer;
+    }
+
+    let primaryB = document.getElementById("addExpBtn");
+    let cancelB = document.getElementById("cancelEditBtn");
+
+    if (primaryB) {
+        primaryB.innerText = "Save Changes";
+        primaryB.classList.remove("successBtn");
+        primaryB.classList.add("warningBtn");
+    }
+
+    if (cancelB) {
+        cancelB.classList.remove("hidden");
+    }
+}
+
+
+function cancelEditBtnClick() {
+    currentEditId = -1;
+
+    let nameBox = document.getElementById("expName");
+    let amtBox = document.getElementById("expAmount");
+    let payerBox = document.getElementById("payerSelect");
+
+    if (nameBox) nameBox.value = "";
+    if (amtBox) amtBox.value = "";
+    if (payerBox) payerBox.value = "";
+
+    let primaryB = document.getElementById("addExpBtn");
+    let cancelB = document.getElementById("cancelEditBtn");
+
+    if (primaryB) {
+        primaryB.innerText = "Save Expense";
+        primaryB.classList.remove("warningBtn");
+        primaryB.classList.add("successBtn");
+    }
+
+    if (cancelB) {
+        cancelB.classList.add("hidden");
+    }
+}
+
+
+function removeExpenseById(targetId) {
+    let resultList = [];
+    for (let y = 0; y < appData.expenses.length; y++) {
+        if (appData.expenses[y].id !== targetId) {
+            resultList.push(appData.expenses[y]);
+        }
+    }
+    appData.expenses = resultList;
+    persistDataToStorage();
+    renderExpensesPage();
+}
+
 
 function resetSettlePage() {}
 
