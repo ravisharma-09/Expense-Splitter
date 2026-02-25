@@ -24,9 +24,28 @@ function initPage() {
 }
 
 
-function loadDataFromStorage() {}
+function loadDataFromStorage() {
+    let rawMembers = localStorage.getItem("expenseSplitterMembersData");
+    let rawExpenses = localStorage.getItem("expenseSplitterExpensesData");
 
-function persistDataToStorage() {}
+    if (rawMembers !== null && rawMembers !== "") {
+        appData.members = JSON.parse(rawMembers);
+    }
+
+    if (rawExpenses !== null && rawExpenses !== "") {
+        appData.expenses = JSON.parse(rawExpenses);
+    }
+}
+
+
+function persistDataToStorage() {
+    let membersString = JSON.stringify(appData.members);
+    let expensesString = JSON.stringify(appData.expenses);
+
+    localStorage.setItem("expenseSplitterMembersData", membersString);
+    localStorage.setItem("expenseSplitterExpensesData", expensesString);
+}
+
 
 function displayErrorMessage() {}
 
