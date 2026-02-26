@@ -47,7 +47,20 @@ function persistDataToStorage() {
 }
 
 
-function displayErrorMessage() {}
+function displayErrorMessage(msgText) {
+    let errorContainer = document.getElementById("errorMsg");
+    if (errorContainer) {
+        errorContainer.innerText = msgText;
+        errorContainer.style.display = "block";
+
+        let timer = 3500;
+        setTimeout(function () {
+            errorContainer.style.display = "none";
+            errorContainer.innerText = "";
+        }, timer);
+    }
+}
+
 
 function renderDashboard() {
     let listElement = document.getElementById("memberList");

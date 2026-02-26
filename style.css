@@ -208,3 +208,13 @@ body {
 
 .expenseList li {
     border-left-color: #2ecc71;
+}
+
+.resultList li {
+    border-left-color: #f39c12;
+    background-color: #fbf8f1;
+}
+
+.statBlock {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
