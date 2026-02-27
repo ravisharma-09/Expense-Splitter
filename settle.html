@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Splitter Pro - Settle</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body onload="initPage()">
+    <div class="navContainer">
+        <div class="navLogo">SplitMate</div>
+        <div class="navLinks">
+            <a href="index.html" class="navItem">Dashboard</a>
+            <a href="expenses.html" class="navItem">Expenses</a>
+            <a href="settle.html" class="navItem activeNavItem">Settle</a>
+        </div>
+    </div>
+
+    <div class="appContainer">
+        <h1 class="pageTitle">Clear Debts</h1>
+
+        <div id="errorMsg" class="errorAlert"></div>
+
+        <div class="contentPanel centerContent">
+            <h2 class="panelHeading">Run the splitting algorithm</h2>
+            <p class="descriptionText">This tool will calculate the minimum number of transactions needed for everyone
+                to be paid back.</p>
+            <button onclick="calculateSettlementBtnClick()" id="calcBtn" class="btn warningBtn massiveBtn">Calculate
+                Final Split</button>
+        </div>
+
+        <div id="resultBox" class="contentPanel resultPanel hidden">
+            <h2 class="panelHeading">Transactions Required</h2>
+            <div id="summaryText" class="summaryMetrics"></div>
+            <div class="listWrapper">
+                <ul id="resultList" class="dataList resultList"></ul>
+            </div>
+            <div class="settlementFooter">
+                <button onclick="document.getElementById('resultBox').classList.add('hidden')"
+                    class="btn secondaryBtn">Dismiss</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

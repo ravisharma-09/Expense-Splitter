@@ -377,7 +377,13 @@ function removeExpenseById(targetId) {
 }
 
 
-function resetSettlePage() {}
+function resetSettlePage() {
+    let resBox = document.getElementById("resultBox");
+    if (resBox) {
+        resBox.classList.add("hidden");
+    }
+}
+
 
 function calculateSettlementBtnClick() {}
 
