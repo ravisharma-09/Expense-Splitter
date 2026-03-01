@@ -385,5 +385,117 @@ function resetSettlePage() {
 }
 
 
-function calculateSettlementBtnClick() {}
+function calculateSettlementBtnClick() {
+    let resBox = document.getElementById("resultBox");
+    let resList = document.getElementById("resultList");
+    let sumText = document.getElementById("summaryText");
+
+    if (!resBox || !resList || !sumText) return;
+
+    resList.innerHTML = "";
+
+    let membersCount = appData.members.length;
+    let expensesCount = appData.expenses.length;
+
+    if (membersCount === 0) {
+        displayErrorMessage("Missing members data.");
+        return;
+    }
+
+    if (expensesCount === 0) {
+        displayErrorMessage("Missing expenses data.");
+        return;
+    }
+
+    resBox.classList.remove("hidden");
+
+    let totalSpend = 0;
+    let ledger = {};
+
+    for (let a = 0; a < membersCount; a++) {
+        let n = appData.members[a];
+        ledger[n] = 0;
+    }
+
+    for (let b = 0; b < expensesCount; b++) {
+        let exAmt = appData.expenses[b].amount;
+        let exPayer = appData.expenses[b].payer;
+
+        totalSpend = totalSpend + exAmt;
+
+        if (ledger[exPayer] !== undefined) {
+            ledger[exPayer] = ledger[exPayer] + exAmt;
+        }
+    }
+
+    let expectedShare = totalSpend / membersCount;
+
+    sumText.innerHTML = "Total spent: <strong>₹" + formatCurrencyValue(totalSpend) + "</strong><br>";
+    sumText.innerHTML += "Each person should pay: <strong>₹" + formatCurrencyValue(expectedShare) + "</strong>";
+
+    let listGivers = [];
+    let listReceivers = [];
+
+    for (let c = 0; c < membersCount; c++) {
+        let pName = appData.members[c];
+        let diff = ledger[pName] - expectedShare;
+
+        if (diff < -0.01) {
+            let giverObj = {
+                person: pName,
+                value: Math.abs(diff)
+            };
+            listGivers.push(giverObj);
+        } else if (diff > 0.01) {
+            let receiverObj = {
+                person: pName,
+                value: diff
+            };
+            listReceivers.push(receiverObj);
+        }
+    }
+
+    let counterMoves = 0;
+    let ix = 0;
+    let iy = 0;
+
+    while (ix < listGivers.length && iy < listReceivers.length) {
+        let gCurrent = listGivers[ix];
+        let rCurrent = listReceivers[iy];
+
+        let moveAmt = 0;
+        if (gCurrent.value < rCurrent.value) {
+            moveAmt = gCurrent.value;
+        } else {
+            moveAmt = rCurrent.value;
+        }
+
+        if (moveAmt > 0.01) {
+            let lItem = document.createElement("li");
+            lItem.innerHTML = "<span><strong>" + gCurrent.person + "</strong> pays <strong>₹" + formatCurrencyValue(moveAmt) + "</strong></span>";
+            lItem.innerHTML += "<span>to <strong>" + rCurrent.person + "</strong></span>";
+            resList.appendChild(lItem);
+            counterMoves++;
+        }
+
+        gCurrent.value = gCurrent.value - moveAmt;
+        rCurrent.value = rCurrent.value - moveAmt;
+
+        if (gCurrent.value <= 0.01) {
+            ix++;
+        }
+        if (rCurrent.value <= 0.01) {
+            iy++;
+        }
+    }
+
+    if (counterMoves === 0) {
+        let perfectItem = document.createElement("li");
+        perfectItem.innerText = "All debts are perfectly cleared!";
+        perfectItem.style.color = "#27ae60";
+        perfectItem.style.fontWeight = "600";
+        perfectItem.style.justifyContent = "center";
+        resList.appendChild(perfectItem);
+    }
+}
 
