@@ -5,7 +5,6 @@ let appData = {
 
 let currentEditId = -1;
 
-
 function initPage() {
     loadDataFromStorage();
 
@@ -23,7 +22,6 @@ function initPage() {
     }
 }
 
-
 function loadDataFromStorage() {
     let rawMembers = localStorage.getItem("expenseSplitterMembersData");
     let rawExpenses = localStorage.getItem("expenseSplitterExpensesData");
@@ -37,7 +35,6 @@ function loadDataFromStorage() {
     }
 }
 
-
 function persistDataToStorage() {
     let membersString = JSON.stringify(appData.members);
     let expensesString = JSON.stringify(appData.expenses);
@@ -45,7 +42,6 @@ function persistDataToStorage() {
     localStorage.setItem("expenseSplitterMembersData", membersString);
     localStorage.setItem("expenseSplitterExpensesData", expensesString);
 }
-
 
 function displayErrorMessage(msgText) {
     let errorContainer = document.getElementById("errorMsg");
@@ -60,7 +56,6 @@ function displayErrorMessage(msgText) {
         }, timer);
     }
 }
-
 
 function renderDashboard() {
     let listElement = document.getElementById("memberList");
@@ -108,7 +103,6 @@ function renderDashboard() {
     if (statAmt) statAmt.innerText = formatCurrencyValue(grandTotalAmount);
 }
 
-
 function formatCurrencyValue(valueNumber) {
     let rounded = Math.round(valueNumber * 100) / 100;
     let parts = rounded.toString().split(".");
@@ -121,7 +115,6 @@ function formatCurrencyValue(valueNumber) {
 
     return integerPart + "." + decimalPart;
 }
-
 
 function addMemberBtnClick() {
     let inputEl = document.getElementById("memberName");
@@ -159,7 +152,6 @@ function addMemberBtnClick() {
     renderDashboard();
 }
 
-
 function executeMemberDeletion(targetName) {
     let hasExpenses = false;
     for (let e = 0; e < appData.expenses.length; e++) {
@@ -184,7 +176,6 @@ function executeMemberDeletion(targetName) {
     persistDataToStorage();
     renderDashboard();
 }
-
 
 function renderExpensesPage() {
     let expListEl = document.getElementById("expList");
@@ -251,7 +242,6 @@ function renderExpensesPage() {
     }
 }
 
-
 function addExpenseBtnClick() {
     let nameBox = document.getElementById("expName");
     let amtBox = document.getElementById("expAmount");
@@ -302,7 +292,6 @@ function addExpenseBtnClick() {
     renderExpensesPage();
 }
 
-
 function startEditExpenseMode(recordId) {
     currentEditId = recordId;
 
@@ -337,7 +326,6 @@ function startEditExpenseMode(recordId) {
     }
 }
 
-
 function cancelEditBtnClick() {
     currentEditId = -1;
 
@@ -363,7 +351,6 @@ function cancelEditBtnClick() {
     }
 }
 
-
 function removeExpenseById(targetId) {
     let resultList = [];
     for (let y = 0; y < appData.expenses.length; y++) {
@@ -376,14 +363,12 @@ function removeExpenseById(targetId) {
     renderExpensesPage();
 }
 
-
 function resetSettlePage() {
     let resBox = document.getElementById("resultBox");
     if (resBox) {
         resBox.classList.add("hidden");
     }
 }
-
 
 function calculateSettlementBtnClick() {
     let resBox = document.getElementById("resultBox");
@@ -498,4 +483,3 @@ function calculateSettlementBtnClick() {
         resList.appendChild(perfectItem);
     }
 }
-
